@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     romanian: "Generate a Romanian slang-based lorem ipsum style text full of humorous and creative swears.",
   };
 
-  const prompt = prompts[type] || prompts.quebecois;
+  const prompt = `${prompts[type]} The text should contain exactly ${length} paragraphs, each with the same number of words.`;
 
   try {
     const completion = await openai.chat.completions.create({
@@ -25,13 +25,14 @@ export async function POST(req: Request) {
         },
         {
           role: "user",
-          content: `${prompt} The text should contain approximately ${length} sentences or phrases.`,
+          content: prompt,
         },
       ],
     });
 
     const result = completion.choices[0]?.message?.content?.trim() || "No content generated.";
-    return new Response(JSON.stringify({ result }), {
+    const paragraphs = result.split('\n').filter(p => p.trim() !== '').slice(0, 3).join('\n\n');
+    return new Response(JSON.stringify({ result: paragraphs }), {
       status: 200,
     });
   } catch (error) {

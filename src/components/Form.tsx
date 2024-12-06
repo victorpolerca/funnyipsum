@@ -64,7 +64,9 @@ const Form: React.FC = () => {
       {result && (
         <div className="mt-4 p-4 border rounded bg-gray-200 text-gray-900">
           <h2 className="font-bold text-lg mb-2">Generated Text:</h2>
-          <p>{result}</p>
+          {result.split('\n\n').map((paragraph, index) => (
+            <p key={index} className="mb-2">{paragraph}</p>
+          ))}
         </div>
       )}
     </div>
