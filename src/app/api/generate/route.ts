@@ -30,7 +30,8 @@ export async function POST(req: Request) {
       ],
     });
 
-    return new Response(JSON.stringify({ result: completion.choices[0].message.content.trim() }), {
+    const result = completion.choices[0]?.message?.content?.trim() || "No content generated.";
+    return new Response(JSON.stringify({ result }), {
       status: 200,
     });
   } catch (error) {
