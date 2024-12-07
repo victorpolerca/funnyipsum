@@ -14,7 +14,8 @@ const Form: React.FC = () => {
     }
     return 0;
   });
-  const disableTimer = true
+  const disableTimer = process.env.NEXT_PUBLIC_DISABLE_TIMER === 'true';
+  const defaultTimer = parseInt(process.env.NEXT_PUBLIC_DEFAULT_TIMER || '180');
 
   useEffect(() => {
     if (timer > 0) {
@@ -42,7 +43,7 @@ const Form: React.FC = () => {
     try {
       const generated = await fetchSwears(type, length);
       setResult(generated);
-      if (!disableTimer) setTimer(180); // 3 minutes timer
+      if (!disableTimer) setTimer(defaultTimer); // Use default timer from environment
     } catch (error) {
       console.log(error)
       setResult("Failed to generate text. Please try again.");
@@ -50,6 +51,50 @@ const Form: React.FC = () => {
       setLoading(false);
     }
   };
+
+  const options = [
+    { value: "genZSlang", label: "Gen Z Slang" },
+    { value: "aussieBBQ", label: "Aussie BBQ" },
+    { value: "aussieSlang", label: "Aussie Slang" },
+    { value: "australian", label: "Australian Slang" },
+    { value: "breakupTexts", label: "Breakup Texts" },
+    { value: "britishTea", label: "British Tea-Drinking" },
+    { value: "canadian", label: "Canadian" },
+    { value: "catMonologue", label: "Cat Monologue" },
+    { value: "cheekyBrit", label: "Cheeky Brit" },
+    { value: "dogNarration", label: "Dog Narration" },
+    { value: "fantasyBard", label: "Fantasy Bard" },
+    { value: "foodCritics", label: "Food Critics" },
+    { value: "gamerCommentary", label: "Gamer Commentary" },
+    { value: "goblinTreasures", label: "Goblin Treasures" },
+    { value: "gymTrainer", label: "Gym Trainer" },
+    { value: "medievalBlacksmith", label: "Medieval Blacksmith" },
+    { value: "millennialStruggles", label: "Millennial Struggles" },
+    { value: "motivationalQuotes", label: "Motivational Quotes" },
+    { value: "officeGossip", label: "Office Gossip" },
+    { value: "outbackAdventurer", label: "Outback Adventurer" },
+    { value: "parrotOverhearing", label: "Parrot Overhearing" },
+    { value: "pirate", label: "Pirate" },
+    { value: "pizzaLover", label: "Pizza Lover" },
+    { value: "popCulture90s", label: "90s Sitcom Character" },
+    { value: "poshBritish", label: "Posh British" },
+    { value: "productReviews", label: "Product Reviews" },
+    { value: "quebecois", label: "Quebecois" },
+    { value: "romanGraffiti", label: "Roman Graffiti" },
+    { value: "romanian", label: "Romanian" },
+    { value: "sarcasticLondoner", label: "Sarcastic Londoner" },
+    { value: "sarcasticWizard", label: "Sarcastic Wizard" },
+    { value: "scottishGranny", label: "Scottish Granny" },
+    { value: "scottishPhrases", label: "Scottish Phrases" },
+    { value: "scottishRant", label: "Scottish Rant" },
+    { value: "southernBBQ", label: "Southern BBQ Pitmaster" },
+    { value: "superhero", label: "Superhero" },
+    { value: "techSupport", label: "Tech Support Agent" },
+    { value: "timeTraveler", label: "Time Traveler" },
+    { value: "victorianWriter", label: "Victorian Writer" },
+    { value: "viralMeme", label: "Viral Meme" },
+    { value: "weirdFood", label: "Weird Food Combinations" },
+  ];
 
   return (
     <div className="space-y-4 text-gray-900">
@@ -61,48 +106,11 @@ const Form: React.FC = () => {
           onChange={(e) => setType(e.target.value)}
           className="w-full p-2 border rounded mt-1 text-gray-900 bg-gray-200"
         >
-          <option value="genZSlang">Gen Z Slang</option>
-          <option value="quebecois">Quebecois</option>
-          <option value="canadian">Canadian</option>
-          <option value="popCulture90s">90s Sitcom Character</option>
-          <option value="superhero">Superhero</option>
-          <option value="pirate">Pirate</option>
-          <option value="medievalBlacksmith">Medieval Blacksmith</option>
-          <option value="techSupport">Tech Support Agent</option>
-          <option value="officeGossip">Office Gossip</option>
-          <option value="australian">Australian Slang</option>
-          <option value="southernBBQ">Southern BBQ Pitmaster</option>
-          <option value="britishTea">British Tea-Drinking</option>
-          <option value="catMonologue">Cat Monologue</option>
-          <option value="dogNarration">Dog Narration</option>
-          <option value="parrotOverhearing">Parrot Overhearing</option>
-          <option value="victorianWriter">Victorian Writer</option>
-          <option value="timeTraveler">Time Traveler</option>
-          <option value="romanGraffiti">Roman Graffiti</option>
-          <option value="breakupTexts">Breakup Texts</option>
-          <option value="productReviews">Product Reviews</option>
-          <option value="motivationalQuotes">Motivational Quotes</option>
-          <option value="millennialStruggles">Millennial Struggles</option>
-          <option value="viralMeme">Viral Meme</option>
-          <option value="fantasyBard">Fantasy Bard</option>
-          <option value="sarcasticWizard">Sarcastic Wizard</option>
-          <option value="goblinTreasures">Goblin Treasures</option>
-          <option value="pizzaLover">Pizza Lover</option>
-          <option value="weirdFood">Weird Food Combinations</option>
-          <option value="foodCritics">Food Critics</option>
-          <option value="amateurGolfer">Amateur Golfer</option>
-          <option value="gamerCommentary">Gamer Commentary</option>
-          <option value="gymTrainer">Gym Trainer</option>
-          <option value="scottishRant">Scottish Rant</option>
-          <option value="scottishPhrases">Scottish Phrases</option>
-          <option value="scottishGranny">Scottish Granny</option>
-          <option value="poshBritish">Posh British</option>
-          <option value="cheekyBrit">Cheeky Brit</option>
-          <option value="sarcasticLondoner">Sarcastic Londoner</option>
-          <option value="aussieBBQ">Aussie BBQ</option>
-          <option value="outbackAdventurer">Outback Adventurer</option>
-          <option value="aussieSlang">Aussie Slang</option>
-          <option value="romanian">Romanian</option>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
       </label>
 
