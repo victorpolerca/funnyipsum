@@ -41,4 +41,8 @@ export const prompts: Record<string, string> = {
   aussieBBQ: "Generate a lorem ipsum text based on Aussie slang from a beachside barbecue.",
   outbackAdventurer: "Write funny lorem ipsum inspired by an outback adventurer’s diary.",
   aussieSlang: "Create a lorem ipsum using phrases like 'fair dinkum' and 'crikey!' in every sentence.",
+  smallTownGossip: "Generate a lorem ipsum inspired by small-town gossip overheard at a Tim Hortons.",
+  passiveAggressiveCanadian: "Write funny lorem ipsum based on the overly polite yet passive-aggressive style of Canadians.",
+  hockeyLovingMoose: "Create lorem ipsum inspired by the adventures of a hockey-loving moose.",
+  canadianPoliteness: "Generate lorem ipsum using exaggerated apologies and awkward politeness.",
 };

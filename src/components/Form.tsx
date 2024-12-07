@@ -15,7 +15,7 @@ const Form: React.FC = () => {
     return 0;
   });
   const disableTimer = process.env.NEXT_PUBLIC_DISABLE_TIMER === 'true';
-  const defaultTimer = parseInt(process.env.NEXT_PUBLIC_DEFAULT_TIMER || '180');
+  const defaultTimer = parseInt(process.env.NEXT_PUBLIC_DEFAULT_TIMER || '60');
 
   useEffect(() => {
     if (timer > 0) {
@@ -60,6 +60,9 @@ const Form: React.FC = () => {
     { value: "breakupTexts", label: "Breakup Texts" },
     { value: "britishTea", label: "British Tea-Drinking" },
     { value: "canadian", label: "Canadian" },
+    { value: "passiveAggressiveCanadian", label: "Canadian Passive-Aggressive" },
+    { value: "hockeyLovingMoose", label: "Canadian Hockey-Loving Moose" },
+    { value: "canadianPoliteness", label: "Canadian politeness" },
     { value: "catMonologue", label: "Cat Monologue" },
     { value: "cheekyBrit", label: "Cheeky Brit" },
     { value: "dogNarration", label: "Dog Narration" },
@@ -94,6 +97,8 @@ const Form: React.FC = () => {
     { value: "victorianWriter", label: "Victorian Writer" },
     { value: "viralMeme", label: "Viral Meme" },
     { value: "weirdFood", label: "Weird Food Combinations" },
+    { value: "smallTownGossip", label: "Canadian Small-Town Gossip" },
+
   ];
 
   return (
