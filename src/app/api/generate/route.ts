@@ -8,12 +8,12 @@ export async function POST(req: Request) {
   const { type, length } = await req.json();
 
   const prompts: Record<string, string> = {
-    quebecois: "Generate a Quebecois slang-based lorem ipsum style text full of humorous and creative swears.",
-    canadian: "Generate a Canadian slang-based lorem ipsum style text full of humorous and creative swears.",
-    romanian: "Generate a Romanian slang-based lorem ipsum style text full of humorous and creative swears.",
+    quebecois: "Generate a Quebecois slang-based lorem ipsum style text full of humorous and creative.",
+    canadian: "Generate a Canadian slang-based lorem ipsum style text full of humorous and creative.",
+    romanian: "Generate a Romanian slang-based lorem ipsum style text full of humorous and creative.",
   };
 
-  const prompt = `${prompts[type]} The text should contain exactly ${length} paragraphs, each with the same number of words.`;
+  const prompt = `${prompts[type]} The text should contain exactly ${length} paragraphs, each paragraph should be concise and contain around 100-150 characters.`;
 
   try {
     const completion = await openai.chat.completions.create({
@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     });
 
     const result = completion.choices[0]?.message?.content?.trim() || "No content generated.";
-    const paragraphs = result.split('\n').filter(p => p.trim() !== '').slice(0, 3).join('\n\n');
+    const paragraphs = result.split('\n\n').filter(p => p.trim() !== '').slice(0, length).join('\n\n');
     return new Response(JSON.stringify({ result: paragraphs }), {
       status: 200,
     });
