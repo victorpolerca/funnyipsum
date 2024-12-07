@@ -1,4 +1,5 @@
 import { OpenAI } from "openai"; // Default import for OpenAI SDK v4
+import { prompts } from "@/utils/prompts"; // Import prompts
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
@@ -6,12 +7,6 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   const { type, length } = await req.json();
-
-  const prompts: Record<string, string> = {
-    quebecois: "Generate a Quebecois slang-based lorem ipsum style text full of humorous and creative.",
-    canadian: "Generate a Canadian slang-based lorem ipsum style text full of humorous and creative.",
-    romanian: "Generate a Romanian slang-based lorem ipsum style text full of humorous and creative.",
-  };
 
   const prompt = `${prompts[type]} The text should contain exactly ${length} paragraphs, each paragraph should be concise and contain around 100-150 characters.`;
 
